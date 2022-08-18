@@ -15,8 +15,8 @@ function login (){
         document.getElementById('contra').classList.add('error');
         document.getElementById('error-contra').innerHTML = "Ingresa tu contraseña";
     } else {
-        sessionStorage.setItem('email', correo);
-        sessionStorage.setItem('contra', contra);
+        localStorage.setItem('email', correo);
+        localStorage.setItem('contra', contra);
         location.href='index.html';
     }
 
