@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function(){
         alert("Cierro sesión");
         localStorage.removeItem("email");
         localStorage.removeItem("contra");
-        location.href = "login.html";
+        location.href='login.html';
     })
     document.getElementById("autos").addEventListener("click", function() {
         localStorage.setItem("catID", 101);
