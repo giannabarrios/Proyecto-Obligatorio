@@ -5,7 +5,9 @@ document.addEventListener("DOMContentLoaded", function(){
     if (correo == null || contrasena == null) {
         alert("¡Debes loggearte!");
         location.href='login.html';
-    }  
+    } else {
+        document.getElementById("email-ingresado").innerHTML = correo;
+    }
     document.getElementById("cierro").addEventListener("click", function() {
         alert("Cierro sesión");
         localStorage.removeItem("email");
