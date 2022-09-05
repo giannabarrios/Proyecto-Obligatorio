@@ -50,28 +50,28 @@ function filtrar(array){
 
         min = parseInt(min);
         max = parseInt(max);
-        let arrayFiltrado = array.filter(product => product.cost >= min && product.cost <= max);
-        showProductsList(arrayFiltrado);
-    }
-    else {showProductsList(array);} 
+        let arrayFiltrado = array.filter(product => product.cost >= min && product.cost <= max); //arreglo filtrado
+        showProductsList(arrayFiltrado);     //muestra listado de prod del arreglo filtrado.
+    } 
+    else {showProductsList(array);}     //muestra listado de prod del arreglo sin filtrar.
 }
 
 //Función que ordena el arreglo según un criterio, devuelve el arreglo ordenado
 function sortProducts(criterio, array){
     let listaOrdenada = [];
-    if (criterio === porPrecioAsc){
+    if (criterio === porPrecioAsc){       //ordena el arreglo en forma ascendente según precio.
         listaOrdenada = array.sort(function(a,b) {
             if (a.cost < b.cost) {return -1;}
             if (a.cost > b.cost) {return 1;}
             return 0;
         })
-    } else if (criterio === porPrecioDesc){
+    } else if (criterio === porPrecioDesc){     //ordena el arreglo en forma descendente según precio.
         listaOrdenada = array.sort(function(a,b) {
             if (a.cost > b.cost) {return -1;}
             if (a.cost < b.cost) {return 1;}
             return 0;
         })
-    } else if (criterio === porCantVendidos){
+    } else if (criterio === porCantVendidos){    //ordena el arreglo en forma descendente según relevancia.
         listaOrdenada = array.sort(function(a,b) {
             if (a.soldCount > b.soldCount) {return -1;}
             if (a.soldCount < b.soldCount) {return 1;}
@@ -84,8 +84,8 @@ function sortProducts(criterio, array){
 //Función que filtra, ordena el arreglo ya filtrado según criterio y muestra el listado de productos del
 //arreglo (filtrado y ordenado)
 function filterSortAndShowProducts(criterio, array){
-    let min = document.getElementById('min').value;
-    let max = document.getElementById('max').value;
+    let min = document.getElementById('min').value;    //primera parte devuelve el arreglo filtrado, si no se 
+    let max = document.getElementById('max').value;    //puede filtrar entonces devuelve el arreglo ingresado.
     let arrayFiltrado = array;
 
     if (((min != undefined) && (min != "") && (parseInt(min)) >= 0) && 
@@ -95,8 +95,8 @@ function filterSortAndShowProducts(criterio, array){
         max = parseInt(max);
         arrayFiltrado = array.filter(product => product.cost >= min && product.cost <= max);
     }
-    ordenada = sortProducts(criterio, arrayFiltrado);
-    showProductsList(ordenada);
+    ordenada = sortProducts(criterio, arrayFiltrado); //2da parte, ordena el arreglo ya filtrado, según criterio.
+    showProductsList(ordenada);  //3ra parte, muestra el listado de prod del arreglo filtrado y ordenado.
 }
 
 let catID = localStorage.getItem("catID");
