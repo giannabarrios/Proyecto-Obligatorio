@@ -188,3 +188,12 @@ a.custom-card:hover {
 .checked {
   color: orange;
 }
+
+/*agregado*/
+nav li ul {
+  display: none;
+  
+}
+nav li:hover > ul {
+  display: block;
+}

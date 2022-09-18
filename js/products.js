@@ -1,5 +1,10 @@
 let productsArray = [];
 
+//Función que guarda el id del producto en el almacenamiento local, y redirige a product-info.hmtl. 
+function setProdID(id) {                    //En la función showProductsList, con el onclick se llama a la función setProdID.
+    localStorage.setItem("prodID", id);
+    window.location = "product-info.html"
+}
 //Función que muestra el listado de productos, párametro de entrada el arreglo
 function showProductsList(array){
     let htmlContentToAppend = "";
@@ -7,7 +12,7 @@ function showProductsList(array){
     for(let i = 0; i < array.length; i++){ 
         let product = array[i];
         htmlContentToAppend += `
-        <div class="list-group-item list-group-item-action">
+        <div onclick="setProdID(${product.id})" class="list-group-item list-group-item-action">  
             <div class="row">
                 <div class="col-3">
                     <img src="` + product.image + `" alt="product image" class="img-thumbnail">

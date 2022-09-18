@@ -30,7 +30,11 @@
           <li class="nav-item">
             <a class="nav-link" href="sell.html">Vender</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item dropdown">
+            <a class="nav-link" id="email-ingresado"></a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" id="cierro">Cerrar sesión</a></li>
+            </ul>
           </li>
         </ul>
       </div>
@@ -38,9 +42,34 @@
   </nav>
   <main>
     <div class="container">
-      <div class="alert alert-danger text-center" role="alert">
-        <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
+      <div id="product-info-container">
       </div>
+      <div class="container">
+          <div class="row" id="imagenes-container">
+          </div>    
+      </div>
+      <br>
+    </div>
+    <br>
+    <div class="row">
+      <div class="list-group" id="product-reviews-container">
+        
+      </div>
+    </div>
+    <br>
+    <div class="container">
+      <h5>Comentar</h5>
+      <p style="margin-bottom: 1vh;">Tu opinión:</p>
+      <textarea class="form-control w-50" rows="4"></textarea>
+      <p><p style="margin-bottom: 1vh;">Tu puntuación:</p>
+      <select id="puntaje" style="width: 13vw;" class="form-control">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+      </select></p>
+      <p><button class="btn btn-primary">Enviar</button></p>
     </div>
   </main>
   <footer class="text-muted">

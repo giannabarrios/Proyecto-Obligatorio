@@ -10,6 +10,15 @@
   <link href="css/font-awesome.min.css" rel="stylesheet">
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
+  <style>
+    nav li ul {
+      display: none;
+      
+    }
+    nav li:hover > ul {
+      display: block;
+    }
+  </style>
 </head>
 
 <body>
@@ -30,7 +39,11 @@
           <li class="nav-item">
             <a class="nav-link" href="sell.html">Vender</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item dropdown">
+            <a class="nav-link" id="email-ingresado"></a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" id="cierro">Cerrar sesión</a></li>
+            </ul>
           </li>
         </ul>
       </div>
