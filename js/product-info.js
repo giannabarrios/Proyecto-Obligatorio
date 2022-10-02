@@ -1,5 +1,10 @@
 let productInfoObject = {};
 
+function setProdID(id) {                    
+    localStorage.setItem("prodID", id);
+    window.location = "product-info.html"
+}
+
 function showProductInfo(product){
     let htmlContentToAppend = "";
     let productinfo = product;
@@ -27,8 +32,8 @@ function showProductInfo(product){
         document.getElementById("product-info-container").innerHTML = htmlContentToAppend; 
         
         let imagenes = "";
-        for (let i = 0; i < product.images.length; i++){
-            let productImages = product.images[i];
+        for (let i = 0; i < productinfo.images.length; i++){
+            let productImages = productinfo.images[i];
             imagenes += `
                     <div class="col">
                         <img src=${productImages}  class="img-thumbnail">
@@ -36,6 +41,26 @@ function showProductInfo(product){
             `
             document.getElementById("imagenes-container").innerHTML = imagenes;
         };    
+
+        let relacionados = "";
+        for (let i =0; i< productinfo.relatedProducts.length; i++){
+            let relatedProd = productinfo.relatedProducts[i];
+            relacionados += `
+            <div onclick="setProdID(${relatedProd.id})" class="col-4">
+                <div class="col">
+                    <div class="card-deck">
+                    <div class="card" style="width: 21rem; height: 17rem;">
+                        <img class="card-img-top" src=${relatedProd.image}>
+                        <div class="card-body" style="padding-left: 10%;">
+                            <div><h5 style="color: dark-gray;">${relatedProd.name}</h5></div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>    
+            `
+            document.getElementById("prod-relacionados").innerHTML = relacionados;
+        };
 };    
 
 
@@ -76,7 +101,34 @@ function showProductReviews(array){        //función que muestra los comentario
         document.getElementById("product-reviews-container").innerHTML = comentarios;
     }
 }
+ 
+//¡Desafiate Entrega 3!
+function esFecha(){      //función me da la fecha y hora actual
+    let hoy = new Date();
+    let dia = hoy.getDate();
+    if (dia<10){
+        dia = "0"+ dia;
+    }
+    let mes = hoy.getMonth() + 1;
+    if (mes<10){
+        mes = "0" + mes;
+    }
+    let anio = hoy.getFullYear();
+    let hora = hoy.getHours();
+    let minutos = hoy.getMinutes();
+    let segundos = hoy.getSeconds();
+    return anio + "-" + mes + "-" + dia + " " + hora + ":" + minutos + ":" + segundos;
+}
 
+function comentar(){   //función agrega comentario que hago al array de comentarios obtenido del json
+    let nuevo ={}
+    nuevo.user = "Me";
+    nuevo.dateTime = esFecha();  //llama a la función para agregar fecha y hora actual de cuando se hace el comentario
+    nuevo.score = document.getElementById('puntaje').value;
+    nuevo.description = document.getElementById('comentario').value;
+    productReviewsArray.push(nuevo); 
+    showProductReviews(productReviewsArray); 
+}
 
 let prodID = localStorage.getItem("prodID");  //toma el id del prod que se guardó en el localStorage, una vez que el usuario seleccionó un producto.
 
@@ -95,5 +147,8 @@ document.addEventListener("DOMContentLoaded", function(e){
             showProductReviews(productReviewsArray);
         }
     });
-
+    document.getElementById('comentar').addEventListener('click',()=>{
+        comentar();
+    });
+       
 });

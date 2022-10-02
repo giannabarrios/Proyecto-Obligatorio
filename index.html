@@ -9,15 +9,6 @@
   <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
-  <style>
-    nav li ul {
-      display: none;
-      
-    }
-    nav li:hover > ul {
-      display: block;
-    }
-  </style>
 </head>
 
 <body>
@@ -39,8 +30,10 @@
             <a class="nav-link" href="sell.html">Vender</a>
           </li>
           <li class="nav-item dropdown">
-            <a class="nav-link" id="email-ingresado"></a>
+            <a class="nav-link btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" id="email-ingresado"></a>
             <ul class="dropdown-menu">
+              <li><a class="dropdown-item" id="carrito">Mi carrito</a></li>
+              <li><a class="dropdown-item" id="perfil">Mi perfil</a></li>
               <li><a class="dropdown-item" id="cierro">Cerrar sesión</a></li>
             </ul>
           </li>

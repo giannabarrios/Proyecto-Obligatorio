@@ -31,8 +31,10 @@
             <a class="nav-link" href="sell.html">Vender</a>
           </li>
           <li class="nav-item dropdown">
-            <a class="nav-link" id="email-ingresado"></a>
+            <a class="nav-link btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" id="email-ingresado"></a>
             <ul class="dropdown-menu">
+              <li><a class="dropdown-item" id="carrito">Mi carrito</a></li>
+              <li><a class="dropdown-item" id="perfil">Mi perfil</a></li>
               <li><a class="dropdown-item" id="cierro">Cerrar sesión</a></li>
             </ul>
           </li>
@@ -61,6 +63,8 @@
       <div class="row">
         <div class="col-lg-6 offset-lg-6 col-md-12 mb-1 container">
           <div class="row container p-0 m-0">
+            <p class="font-weight-normal">Buscar: <!--¡Desafiate Entrega 2!-->
+            <input type="search" placeholder="Nombre, descripción..." id="inputBuscar"><input class="btn btn-light btn-block" type="submit" value="Buscar" id="btnBuscar"></p>
             <div class="col">
               <p class="font-weight-normal text-end my-2">Precio</p>
             </div>

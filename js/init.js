@@ -50,6 +50,12 @@ document.addEventListener("DOMContentLoaded", function(){
   } else {
       document.getElementById("email-ingresado").innerHTML = correo;
   }
+  document.getElementById("carrito").addEventListener("click", function(){
+    location.href='cart.html';
+  });
+  document.getElementById("perfil").addEventListener("click", function(){
+    location.href='my-profile.html';
+  });
   document.getElementById("cierro").addEventListener("click", function() {
       alert("Cierro sesión");
       localStorage.removeItem("email");

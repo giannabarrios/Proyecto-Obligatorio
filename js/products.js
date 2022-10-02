@@ -1,4 +1,7 @@
 let productsArray = [];
+let arregloBuscado = [];
+let buscado = undefined;
+let input = document.getElementById("inputBuscar");
 
 //Función que guarda el id del producto en el almacenamiento local, y redirige a product-info.hmtl. 
 function setProdID(id) {                    //En la función showProductsList, con el onclick se llama a la función setProdID.
@@ -104,6 +107,38 @@ function filterSortAndShowProducts(criterio, array){
     showProductsList(ordenada);  //3ra parte, muestra el listado de prod del arreglo filtrado y ordenado.
 }
 
+//¡Desafiate Entrega 2!
+function buscar(arregloSinFiltrar) {
+    let buscado = document.getElementById("inputBuscar").value;
+    let filtradoPorTitulo = [];
+    let filtradoPorDescripcion = [];
+
+    if ((buscado != "") && (buscado != undefined)){
+        buscado = document.getElementById("inputBuscar").value;
+        filtradoPorTitulo = arregloSinFiltrar.filter(product => {
+            return product.name.toLowerCase().indexOf(buscado.toLowerCase()) > -1;
+        });
+        filtradoPorDescripcion = arregloSinFiltrar.filter(product => {
+            return product.description.toLowerCase().indexOf(buscado.toLowerCase()) > -1;
+        });
+        arregloBuscado = filtradoPorTitulo.concat(filtradoPorDescripcion);
+        for (let i = 0; i < filtradoPorTitulo.length; i++){
+            let elemento = filtradoPorTitulo[i];
+            if ((filtradoPorDescripcion.includes(elemento)) && (filtradoPorDescripcion.length >= filtradoPorTitulo.length)){
+                arregloBuscado = filtradoPorDescripcion;   //si alguno de los elementos del arreglo filtradoPorTitulo está también en el arreglo por descripción       
+            }                                            //y el arreglo por descripción contiene más elementos, entonces el arreglo buscado pasa a ser ese.       
+            else if ((filtradoPorDescripcion.includes(elemento)) && (filtradoPorDescripcion.length < filtradoPorTitulo.length)){
+                arregloBuscado = filtradoPorTitulo;
+
+            }
+            else {arregloBuscado = filtradoPorTitulo.concat(filtradoPorDescripcion);} //caso en el que no hay elementos coincidentes entre los dos arreglos.
+        }
+        showProductsList(arregloBuscado);  //mostrar listado de productos que coincidan con la búsqueda
+    } 
+    else {showProductsList(productsArray);
+    } 
+}    
+
 let catID = localStorage.getItem("catID");
 
 document.addEventListener("DOMContentLoaded", function(e){
@@ -135,4 +170,10 @@ document.addEventListener("DOMContentLoaded", function(e){
 
         showProductsList(productsArray);
     })
+    input.addEventListener('input', (e)=>{
+        buscar(productsArray);
+    });
+    document.getElementById("btnBuscar").addEventListener('click', ()=>{
+        buscar(productsArray);
+    });
 });
