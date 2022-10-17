@@ -9,11 +9,7 @@ function showProductInfo(product){
     let htmlContentToAppend = "";
     let productinfo = product;
     
-        htmlContentToAppend += `
-        <div>
-            <div class="mb-4 mt-4">
-            <h4>${productinfo.name}</h4>
-            </div>
+        htmlContentToAppend += `                               
             <hr>
             <div>
                 <strong>Precio</strong>
@@ -27,20 +23,33 @@ function showProductInfo(product){
                 <p><strong>Imágenes ilustrativas</strong></p>
                 
             </div>
-        </div>
         `
+        document.getElementById("titulo").innerHTML = productinfo.name;
         document.getElementById("product-info-container").innerHTML = htmlContentToAppend; 
-        
+    
+        //¡Desafiate Entrega 4!
+        let arregloImagenes = productinfo.images;
         let imagenes = "";
-        for (let i = 0; i < productinfo.images.length; i++){
-            let productImages = productinfo.images[i];
-            imagenes += `
-                    <div class="col">
-                        <img src=${productImages}  class="img-thumbnail">
-                    </div>
-            `
-            document.getElementById("imagenes-container").innerHTML = imagenes;
-        };    
+        let i = 0;
+        arregloImagenes.forEach(elemento=> { 
+            if (i === 0){                       //le doy la clase active a la primera imagen para que sea visible el carrusel.
+                imagenes += `
+                <div class="carousel-item active">
+                    <img src="${elemento}" class="d-block img-thumbnail">
+                </div>
+                `
+            } else {
+                imagenes += `       
+                <div class="carousel-item">
+                    <img src="${elemento}" class="d-block img-thumbnail">
+                </div>
+                `
+            }
+            i++;
+            
+        }); 
+        document.getElementById("carouImagenes").innerHTML = imagenes;
+        //Hasta acá el ¡Desafiate Entrega 4!
 
         let relacionados = "";
         for (let i =0; i< productinfo.relatedProducts.length; i++){
@@ -129,6 +138,7 @@ function comentar(){   //función agrega comentario que hago al array de comenta
     productReviewsArray.push(nuevo); 
     showProductReviews(productReviewsArray); 
 }
+//Hasta acá ¡Desafiate Entrega 3!
 
 let prodID = localStorage.getItem("prodID");  //toma el id del prod que se guardó en el localStorage, una vez que el usuario seleccionó un producto.
 
@@ -150,5 +160,5 @@ document.addEventListener("DOMContentLoaded", function(e){
     document.getElementById('comentar').addEventListener('click',()=>{
         comentar();
     });
-       
+    
 });

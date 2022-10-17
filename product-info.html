@@ -44,13 +44,39 @@
   </nav>
   <main>
     <div class="container">
-      <div id="product-info-container">
+      <div>
+        <div class="row mb-4 mt-5">
+          <div class="col-6 col-lg-4">
+          <h4 id="titulo"></h4></div>
+        
+          <div class="col-6 offset-lg-5 col-lg-3">
+            <button type="button" class="btn btn-success" id="btnComprar">Comprar</button>
+          </div>
+        </div>
+        <div id="product-info-container"></div>
       </div>
-      <div class="container">
-          <div class="row" id="imagenes-container">
-          </div>    
-      </div>
+      <div class="container" id="imagenes-container">
+        <div class="row"><div class="col-6 offset-3">
+        <div id="carouselImages" class="carousel slide" data-bs-ride="carousel">  <!--¡Desafiate Entrega 4!-->
+          <div class="carousel-inner" id="carouImagenes">
+            
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselImages" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselImages" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+ 
+        </div>
+        </div>
       <br>
+      </div>
+          <!--<div class="row" id="imagenes-container">
+          </div>-->   
     </div>
     <br>
     <div class="row">
@@ -107,6 +133,7 @@
   <script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/init.js"></script>
   <script src="js/product-info.js"></script>
+  
 </body>
 
 </html>

@@ -42,11 +42,53 @@
     </div>
   </nav>
   <main>
-    <div class="container">
-      <div class="alert alert-danger text-center" role="alert">
-        <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
-      </div>
+    <div class="text-center p-4">
+      <h3>Carrito de compras</h3>
     </div>
+    <div class="container">
+      <h4 class="py-2">Artículos a comprar</h4>
+      <table class="table">
+        <thead>
+          <tr><th></th>
+            <th>Nombre</th>
+            <th>Costo</th>
+            <th>Cantidad</th>
+            <th>Subtotal</th>
+          </tr>
+        </thead>
+        <tbody class="table-group-divider" id="tabla">
+         
+        <tr id="nuevoProd"></tr>  
+        </tbody>
+      </table>
+      <hr>
+      
+      <h4 class="py-2">Tipo en envío</h4>
+      <input type="radio" name="radio" value="premium"><span class="px-1">Premium 2 a 5 días(15%)</span><br>
+      <input type="radio" name="radio" value="express"><span class="px-1">Express 5 a 8 días (7%)</span><br>
+      <input type="radio" name="radio" value="standard"><span class="px-1">Standard 12 a 15 días(5%)</span><br>
+      
+      <h4 class="py-3">Dirección de envío</h4>
+      <div class="form-group row mb-3">
+        <div class="col-5">      <!--Esta class indica cuantas columnas ocupará el input, permite modificarle el tamaño-->
+          <label for="calle">Calle</label>
+          <input class="form-control" id="calle" type="text">
+        </div>
+        <div class="col-3">
+          <label for="nro">Número</label>
+          <input class="form-control" id="nro" type="text">
+        </div>
+      </div>
+      <div class="form-group row mb-3">
+        <div class="col-5">
+          <label for="esq">Esquina</label>
+          <input class="form-control" id="esq" type="text">
+        </div>
+      </div>
+      <br>  
+      <hr>
+    </div>
+    
   </main>
   <footer class="text-muted">
     <div class="container">
@@ -69,6 +111,7 @@
   <script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/init.js"></script>
   <script src="js/cart.js"></script>
+  
 </body>
 
 </html>
