@@ -58,37 +58,77 @@
         </thead>
         <tbody class="table-group-divider" id="tabla">
          
-        <tr id="nuevoProd"></tr>  
         </tbody>
       </table>
       <hr>
       
       <h4 class="py-2">Tipo en envío</h4>
-      <input type="radio" name="radio" value="premium"><span class="px-1">Premium 2 a 5 días(15%)</span><br>
-      <input type="radio" name="radio" value="express"><span class="px-1">Express 5 a 8 días (7%)</span><br>
-      <input type="radio" name="radio" value="standard"><span class="px-1">Standard 12 a 15 días(5%)</span><br>
+      <input type="radio" name="porcentaje" value=0.15 id="prem"><span class="px-1">Premium 2 a 5 días(15%)</span><br>
+      <input type="radio" name="porcentaje" value=0.07 id="exp"><span class="px-1">Express 5 a 8 días (7%)</span><br>
+      <input type="radio" name="porcentaje" value=0.05 id="stan" checked><span class="px-1">Standard 12 a 15 días(5%)</span><br>
       
       <h4 class="py-3">Dirección de envío</h4>
       <div class="form-group row mb-3">
         <div class="col-5">      <!--Esta class indica cuantas columnas ocupará el input, permite modificarle el tamaño-->
           <label for="calle">Calle</label>
-          <input class="form-control" id="calle" type="text">
+          <input class="form-control" name="direccion" id="calle" type="text" required>
+          <div class="invalid-feedback">
+            Ingresa una calle
+          </div>
         </div>
         <div class="col-3">
           <label for="nro">Número</label>
-          <input class="form-control" id="nro" type="text">
+          <input class="form-control" name="direccion" id="nro" type="number" required> 
+          <div class="invalid-feedback">
+            Ingresa un número
+          </div>
         </div>
       </div>
       <div class="form-group row mb-3">
         <div class="col-5">
           <label for="esq">Esquina</label>
-          <input class="form-control" id="esq" type="text">
+          <input class="form-control" name="direccion" id="esq" type="text" required>
+          <div class="invalid-feedback">
+            Ingresa una esquina
+          </div>
         </div>
       </div>
       <br>  
       <hr>
+
+      <h4>Costos</h4>
+      <ul class="list-group" id="costos">
+        <li class="list-group-item">
+          <div>Subtotal<span class="float-end">USD <span id="subtotGeneral"></span></span></div>
+          <p>Costo unitario del producto por cantidad</p>
+        </li>
+        <li class="list-group-item">
+          <div>Costo de envío<span class="float-end">USD <span id="costoEnvio"></span></span></div>
+          <p>Según el tipo de envío</p>
+        </li>
+        <li class="list-group-item">
+          <div>Total(USD)<strong class="float-end">USD <span id="total"></span></strong></div>
+        </li>
+      </ul>
+      <br>
+      <hr>
+      
+      <h4 class="mt-4 mb-4">Forma de pago</h4>
+      <div>
+        <p><span id="opcSeleccionada">No ha seleccionado</span><button type="button" class="btn btn-link" data-bs-toggle="modal"
+        data-bs-target="#modalPagos">Seleccionar</button></p>
+        <span class="invalid-feedback" id="feedbackSeleccionar">Debe seleccionar una forma de pago</span>
+      </div>    
+      <br>
+      <br>
+
+      <div class="row">
+        
+        <button type="button" class="btn btn-primary" id="btnFinalizar">Finalizar compra</button>
+        
+      </div>
     </div>
-    
+           
   </main>
   <footer class="text-muted">
     <div class="container">
@@ -107,6 +147,53 @@
       <div></div>
       <div></div>
     </div>
+  </div>
+
+  <div class="modal fade" id="modalPagos" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Forma de pago</h5>
+          
+        </div>
+        <div class="modal-body">
+          <div class="container">
+            <input type="radio" name="formaPago" value="credito" id="opcCredito" required><span class="px-1">Tarjeta de crédito</span>
+            <hr>
+            <div class="form-group row mb-3">
+              <div class="col-6">      
+                <label for="nroTarj">Número de tarjeta</label>
+                <input class="form-control" id="nroTarj" type="number">
+              </div>
+              <div class="col-4">
+                <label for="codTarj">Código de seg.</label>
+                <input class="form-control" id="codTarj" type="number">
+              </div>
+            </div>
+            <div class="form-group row mb-3">
+              <div class="col-6">
+                <label for="vencTarj">Vencimiento (MM/AA)</label>
+                <input class="form-control" id="vencTarj" type="text">   <!--Ponerle formato fecha mes/año-->
+              </div>
+            </div>
+            <input type="radio" name="formaPago" value="transferencia" id="opcTransferencia" required><span class="px-1">Transferencia bancaria</span>
+            <hr>
+            <div class="form-group row mb-3">
+              <div class="col-6">      
+                <label for="nroCta">Número de cuenta</label>
+                <input class="form-control" id="nroCta" type="number">
+              </div>
+            </div>  
+          </div>
+          <hr class="text-muted">
+          <div><button type="button" class="btn btn-primary float-end mb-3 me-3" data-bs-dismiss="modal">Cerrar</button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="alert alert-success fade" role="alert" id="alert-success">
+    <p class="text-success py-1 px-2">¡Has comprado con éxito!</p>
   </div>
   <script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/init.js"></script>
