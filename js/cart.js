@@ -46,7 +46,7 @@ function showCartProducts(infoCartObject){
     }
 
     let costoEnvio = 0;
-    for (let i=0; i< envios.length; i++){
+    for (let i=0; i< envios.length; i++){     //cálculo del costo de envío según la opción elegida(input checked)
         if (envios[i].checked){
             costoEnvio = subtotal * parseFloat(envios[i].value);
             
@@ -203,6 +203,5 @@ document.addEventListener("DOMContentLoaded", function(e){
             
         }   
         ["change", "input"].forEach(evento => {document.body.addEventListener(evento, validaciones)}); 
-        //(document.getElementById("calle")).classList.add("is-invalid");
     });  
 });
