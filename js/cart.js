@@ -46,9 +46,9 @@ function showCartProducts(infoCartObject){
     }
 
     let costoEnvio = 0;
-    for (let i=0; i< envios.length; i++){     //cálculo del costo de envío según la opción elegida(input checked)
-        if (envios[i].checked){
-            costoEnvio = subtotal * parseFloat(envios[i].value);
+    for (let j=0; j< envios.length; j++){     //cálculo del costo de envío según la opción elegida(input checked)
+        if (envios[j].checked){
+            costoEnvio = subtotal * parseFloat(envios[j].value);
             
         }
     }
@@ -56,7 +56,7 @@ function showCartProducts(infoCartObject){
 
     
     document.getElementById("subtotGeneral").innerHTML = subtotal;
-    document.getElementById("costoEnvio").innerHTML = costoEnvio;
+    document.getElementById("costoEnvio").innerHTML = costoEnvio.toFixed(0);
     document.getElementById("total").innerHTML = total;
 }
 
@@ -107,7 +107,7 @@ function validaciones(){
     } 
     let cantidades = document.getElementsByName("cantidad");    //Validación ingreso de cantidad de cada prod
     for(let i=0; i< cantidades.length; i++){  
-        if(!(cantidades[i]).checkValidity()){      
+        if(!(cantidades[i]).checkValidity()){      //checkValidity chequea que se cumplan los atributos
             i =  cantidades.length; 
             validityState = false;
              
@@ -163,8 +163,6 @@ function validaciones(){
     return validityState;
 }
 
-let direccion = document.getElementsByName("direccion"); 
-
 document.addEventListener("DOMContentLoaded", function(e){
     getJSONData(CART_INFO_URL + userID + EXT_TYPE).then(function(resultObj){
         if (resultObj.status === "ok")
@@ -178,8 +176,8 @@ document.addEventListener("DOMContentLoaded", function(e){
                     mostrarCostos();
                 });
             };
-            for (let i = 0; i < envios.length; i++){
-                envios[i].addEventListener("click",function(){
+            for (let j = 0; j < envios.length; j++){
+                envios[j].addEventListener("click",function(){
                     mostrarCostos();
                 });
             };
@@ -202,6 +200,6 @@ document.addEventListener("DOMContentLoaded", function(e){
             }, 6000);  
             
         }   
-        ["change", "input"].forEach(evento => {document.body.addEventListener(evento, validaciones)}); 
-    });  
+        ["change", "input"].forEach(evento => {document.body.addEventListener(evento, validaciones)}); //dentro del evento click del btn finalizar,
+    });                                                                      //si se da algunos de estos eventos se ejecuta nuevamente la func validaciones.           
 });
