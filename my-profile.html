@@ -58,8 +58,57 @@
   </nav>
   <main>
     <div class="container">
-      <div class="alert alert-danger text-center" role="alert">
-        <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
+        
+      <div class="row justify-content-md-center">
+        <div class="col-md-8 order-md-1">
+          <div class="mt-4 mb-5">
+            <h4>Perfil</h4>
+          </div>
+          <hr class="mb-3">
+          <form action="#" method="get" class="needs-validation" id="profile-info" novalidate>
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="name" class="form-label">Primer nombre*</label>
+                <input class="form-control" name="perfil" id="name" type="text" required> 
+                <div class="invalid-feedback">
+                  Debe ingresar un nombre.
+                </div>
+              </div>  
+              <div class="col-md-6 mb-3">
+                <label for="secname" class="form-label">Segundo nombre</label>
+                <input class="form-control" name="perfil" id="secname" type="text"> 
+              </div>  
+            </div>
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="lastname" class="form-label">Primer apellido*</label>
+                <input class="form-control" name="perfil" id="lastname" type="text" required> 
+                <div class="invalid-feedback">
+                  Debe ingresar un apellido.
+                </div>
+              </div>  
+              <div class="col-md-6 mb-3">
+                <label for="seclastname" class="form-label">Segundo apellido</label>
+                <input class="form-control" name="perfil" id="seclastname" type="text"> 
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="email" class="form-label">E-mail*</label>
+                <input class="form-control" name="perfil" id="email" type="email" required> 
+                <div class="invalid-feedback">
+                  Debe ingresar un email.
+                </div>
+              </div>  
+              <div class="col-md-6 mb-5">
+                <label for="tel" class="form-label">Télefono de contacto</label>
+                <input class="form-control" name="perfil" id="tel" type="number"> 
+              </div> 
+            </div>  
+            <hr class="mt-5">
+            <button type="submit" class="btn btn-primary" id="guardar">Guardar cambios</button>
+          </form>
+        </div>   
       </div>
     </div>
   </main>

@@ -1,10 +1,10 @@
 function login (){
 
-    let correo = document.getElementById('email').value;
+    let correo = document.getElementById('email').value;    //Crea estas dos variables para guardar los datos de email y contraseña ingresados.
     let contra = document.getElementById('contra').value;
 
-    if (correo==="" && contra===""){
-        document.getElementById('email').classList.add('error');
+    if (correo==="" && contra===""){            //Hacer un form y validaciones quedan más sencillas. Inputs con class form-control
+        document.getElementById('email').classList.add('error');                
         document.getElementById('error-email').innerHTML = "Ingresa tu e-mail";
         document.getElementById('contra').classList.add('error');
         document.getElementById('error-contra').innerHTML = "Ingresa tu contraseña";
@@ -24,7 +24,7 @@ function login (){
 
 document.addEventListener('DOMContentLoaded',()=>{
 
-    document.getElementById('inicio').addEventListener('click',()=>{
+    document.getElementById('inicio').addEventListener('click',()=>{   //Hacer un form y usar el evento submit!!!
         login();
     })
 })

@@ -6,6 +6,7 @@ const PRODUCT_INFO_COMMENTS_URL = "https://japceibal.github.io/emercado-api/prod
 const CART_INFO_URL = "https://japceibal.github.io/emercado-api/user_cart/";
 const CART_BUY_URL = "https://japceibal.github.io/emercado-api/cart/buy.json";
 const EXT_TYPE = ".json";
+//let usuarios = [];
 
 let showSpinner = function(){
   document.getElementById("spinner-wrapper").style.display = "block";
@@ -40,7 +41,21 @@ let getJSONData = function(url){
     });
 }
 
+
 document.addEventListener("DOMContentLoaded", function(){
+  
+  /*for (let i = 0; i < usuarios.length; i++){
+    usuarios[i].email = '';
+    usuarios[i].name1 = '';
+    usuarios[i].name2= '';
+    usuarios[i].lastname1 = '';
+    usuarios[i].lastname2 = '';
+    usuarios[i].tel = '';
+  }*/
+
+  //let usuariosGuardados = []
+  //console.log(usuariosGuardados);
+
   let correo = localStorage.getItem("email");
   let contrasena = localStorage.getItem("contra");
 
@@ -49,6 +64,10 @@ document.addEventListener("DOMContentLoaded", function(){
       location.href='login.html';
   } else {
       document.getElementById("email-ingresado").innerHTML = correo;
+      /*if (!usuarios.includes(correo)){
+        usuarios.push(correo);
+        localStorage.setItem('listausuarios', usuarios);
+      }*/
   }
   document.getElementById("carrito").addEventListener("click", function(){
     location.href='cart.html';
@@ -63,3 +82,7 @@ document.addEventListener("DOMContentLoaded", function(){
       location.href='login.html';
   });
 });  
+
+
+
+//js de bootstrap: <script src="js/bootstrap.bundle.min.js"></script>
