@@ -100,10 +100,6 @@ let btnGuardar = document.getElementById("guardar");
 
 document.addEventListener("DOMContentLoaded", function(e){
     saveEmail(profileEmail);
-    /*let usuarios = JSON.parse(localStorage.getItem("usuariosGuardados"));
-    usuarios.splice(1,1);
-    localStorage.setItem("usuariosGuardados", JSON.stringify(usuarios));*/
-
     profileForm.addEventListener("submit", function(e){   
         if(!profileForm.checkValidity()){               
             e.preventDefault();
