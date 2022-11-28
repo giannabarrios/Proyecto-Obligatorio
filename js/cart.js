@@ -208,6 +208,7 @@ document.addEventListener("DOMContentLoaded", function(e){
                         carrito = infoCartObject.articles;
                         localStorage.setItem("carritoLocalSto", JSON.stringify(carrito));
                     }
+                    showCartProducts(infoCartObject);
                     mostrarCostos();
                 });
             };
