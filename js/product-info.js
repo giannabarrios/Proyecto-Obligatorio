@@ -140,6 +140,36 @@ function comentar(){   //función agrega comentario que hago al array de comenta
 }
 //Hasta acá ¡Desafiate Entrega 3!
 
+//¡Desafiate 5!: botón Comprar
+function comprar(product){
+    let carrito = JSON.parse(localStorage.getItem("carritoLocalSto"));
+    if((product.images !== undefined) && (product.images.length !== 0)){  //Tengo en cuenta el caso de que algún producto pueda no tener ninguna imagen adjunta.
+        img = product.images[0]; 
+    } else{
+        img = "";  //o imagen en blanco
+    }
+    if(carrito == null){   //si no hay ningún carrito cargado en el localStorage, creo uno con el prod precargado + el prod que le di comprar.
+        carrito = [{id: 50924, name: "Peugeot 208", count: 1, unitCost: 15200, currency: "USD", image: "img/prod50924_1.jpg"}];
+        carrito.push({id: `${product.id}`, name: `${product.name}`, count: 1, unitCost: `${product.cost}`, currency: `${product.currency}`, image: `${img}`});
+    } else{    //si ya hay carrito en el localStorage, agrego el prod que le di Comprar.
+        let found = carrito.find(element => element.id == `${product.id}`);
+        if (found == undefined){   //no se ha cargado aún ese producto en el carrito, entonces se agrega al arreglo carrito
+            carrito.push({id: `${product.id}`, name: `${product.name}`, count: 1, unitCost: `${product.cost}`, currency: `${product.currency}`, image: `${img}`});
+        }    
+        else {  //caso en el que ya se le dio comprar a ese prod por lo menos una vez, aumenta la cant de ese artículo en 1.
+            let index = carrito.findIndex(element => element.id == `${product.id}`);
+
+            carrito[index].count = (parseInt(carrito[index].count)) + 1;
+        }
+    }
+
+    //guardar carrito en localstorage
+    localStorage.setItem("carritoLocalSto", JSON.stringify(carrito));
+}    
+
+//Hasta acá ¡Desafiate 5!
+
+
 let prodID = localStorage.getItem("prodID");  //toma el id del prod que se guardó en el localStorage, una vez que el usuario seleccionó un producto.
 
 document.addEventListener("DOMContentLoaded", function(e){
@@ -148,6 +178,9 @@ document.addEventListener("DOMContentLoaded", function(e){
         {
             productInfoObject = resultObj.data;
             showProductInfo(productInfoObject);
+            document.getElementById('btnComprar').addEventListener('click', ()=>{
+                comprar(productInfoObject);
+            });
         }
     });
     getJSONData(PRODUCT_INFO_COMMENTS_URL + prodID + EXT_TYPE).then(function(resultObj){

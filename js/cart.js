@@ -7,7 +7,7 @@ let feedbackBtnSeleccionar = document.getElementById("feedbackSeleccionar");
 let btnFinalizar = document.getElementById("btnFinalizar");
 
 function showCartProducts(infoCartObject){
-    let linea = "";
+    let linea = "";                    //inforCartObjects.articles es el arreglo actualizado que contiene todos los productos comprados que compró el usuario.
     for (let i = 0; i < infoCartObject.articles.length; i++) {  //hago este for teniendo en cuenta que puede haber arreglos que tengan más de un artículo.
         let articuloComprado = infoCartObject.articles[i];
         
@@ -18,6 +18,7 @@ function showCartProducts(infoCartObject){
         <td>${articuloComprado.currency} <span class="precio">${articuloComprado.unitCost}</span></td>
         <td><input name="cantidad" class="form-control w-25" type="number" min="1" value="${articuloComprado.count}" required></td>
         <td><strong><span class="moneda">${articuloComprado.currency}</span> <span class="subtotal">${articuloComprado.unitCost*articuloComprado.count}</span></strong></td>
+        <td><i class="fas fa-trash-alt fa-lg fa-border eliminar" style="color: red; padding: 20% 20%; border-radius: 15% 15%; border-color: red;"></i></td>
         </tr>
         `
 
@@ -33,16 +34,17 @@ function showCartProducts(infoCartObject){
     let total = 0;
 
     let monedas = document.getElementsByClassName("moneda");  //chequea si el precio del producto está en UYU, lo pasa a USD para el cálculo de los costos totales.
+    console.log(monedas);
+    
     for (let i=0; i< monedas.length; i++){                                      
         let moneda = monedas[i];
-        if (moneda === "UYU"){
-            precios[i] = parseInt(precios[i]/40);
-        } 
-    }
-    for (let i=0; i< precios.length; i++){
-        subtotales[i].innerHTML = parseFloat(precios[i].innerHTML) * parseFloat(cantidades[i].value);
-        subtotal += parseFloat(precios[i].innerHTML) * parseFloat(cantidades[i].value);  //suma de los subtot de cada prod
-        
+        if (moneda.innerHTML == "UYU"){    
+            subtotales[i].innerHTML = parseFloat(precios[i].innerHTML) * parseFloat(cantidades[i].value);
+            subtotal += parseFloat((precios[i].innerHTML)/40) * parseFloat(cantidades[i].value);
+        } else{
+            subtotales[i].innerHTML = parseFloat(precios[i].innerHTML) * parseFloat(cantidades[i].value);
+            subtotal += parseFloat(precios[i].innerHTML) * parseFloat(cantidades[i].value);  //suma de los subtot de cada prod
+        }
     }
 
     let costoEnvio = 0;
@@ -163,22 +165,61 @@ function validaciones(){
     return validityState;
 }
 
+//¡Desafiate 6! Eliminar producto del carrito 
+
+function eliminar(pos){                       //Al actualizar aparece otra vez el producto!!!!
+    let carrito = JSON.parse(localStorage.getItem("carritoLocalSto"));
+    if(carrito !== null){
+        carrito.splice(pos, 1);
+        localStorage.setItem("carritoLocalSto", JSON.stringify(carrito));
+        infoCartObject = {user: 25801, articles: carrito};
+    } else {
+        infoCartObject.articles.splice(pos, 1);
+    }
+    showCartProducts(infoCartObject);
+    mostrarCostos();
+
+}
+
+
+
 document.addEventListener("DOMContentLoaded", function(e){
     getJSONData(CART_INFO_URL + userID + EXT_TYPE).then(function(resultObj){
         if (resultObj.status === "ok")
         {
-            infoCartObject = resultObj.data;
+            let carrito = JSON.parse(localStorage.getItem("carritoLocalSto"));
+            console.log(carrito);
+            if(carrito !== null){     //Si ya hay un carrito en el localStorage, entonces se define el objeto como ese carrito, y es el que se mostrará
+                infoCartObject = {user: 25801, articles: carrito};
+                console.log(infoCartObject);
+            }
+            else {
+                infoCartObject = resultObj.data; //Si no hay un carrito en localSto, entonces se muestra el prod precargado solamente.
+                console.log(infoCartObject);
+            }     
+            
             showCartProducts(infoCartObject);
             mostrarCostos();
             for (let i = 0; i < infoCartObject.articles.length; i++) {
                 document.getElementsByName("cantidad")[i].addEventListener("change",function(){
-                    multiplicar(i);
+                    
+                    infoCartObject.articles[i].count = parseInt(document.getElementsByName("cantidad")[i].value);
+                    if(carrito !== null){ 
+                        carrito = infoCartObject.articles;
+                        localStorage.setItem("carritoLocalSto", JSON.stringify(carrito));
+                    }
                     mostrarCostos();
                 });
             };
             for (let j = 0; j < envios.length; j++){
                 envios[j].addEventListener("click",function(){
                     mostrarCostos();
+                });
+            };
+            let arregloEliminar = document.getElementsByClassName("eliminar"); 
+            for(let k = 0; k < arregloEliminar.length; k++){        //¡Desafiate 6! si se hace click en el ícono eliminar
+                arregloEliminar[k].addEventListener("click",function(){    //de algún prod, se ejecuta la func eliminar
+                    eliminar(k);                                           //para la posición de ese prod.     
                 });
             };
                                 
